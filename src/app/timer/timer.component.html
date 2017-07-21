@@ -1,8 +1,7 @@
 <div>
-
   <button (click)="setTimer(!timerStarted)">{{timerStarted ? 'STOP' : 'START'}}</button>
   <button (click)="reset()">Reset</button>
 
-  Time remaining: <strong>{{timeRemaining}}</strong> seconds
+  Remaining: <strong>{{timeRemaining}}</strong> seconds
   <audio #audioNotification preload [src]="soundPath" class="hidden"></audio>
 </div>

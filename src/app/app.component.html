@@ -1,9 +1,8 @@
 <ng-container>
 
   <label for="countTime">Time [minutes]</label>
-  <input id="countTime" type="number" [(ngModel)]="timeMinutesChosen" [disabled]="timeFieldDisabled">
+  <input id="countTime" type="number" [(ngModel)]="timeMinutesChosen" [disabled]="timeFieldDisabled" [min]="0">
   <app-timer [timeMinutes]="timeMinutesChosen"
              [soundPath]="SOUND_FILE_PATH"
              (onTimerStateChange)="toggleTimeField($event)"></app-timer>
-
 </ng-container>
