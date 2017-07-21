@@ -7,8 +7,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <app-root>
+    <img class="loading" src="assets/loading.png" alt="">
+  </app-root>
+  <script>
+    if (window.navigator) {
+      window.navigator.serviceWorker.register('service-worker.js').then(function (e) {
+        console.log('service worker registered!', e);
+      })
+    }
+  </script>
 </body>
 </html>

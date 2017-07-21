@@ -1,0 +1,21 @@
+{
+  "name": "Timer App",
+  "short_name": "Timer PWA",
+  "icons": [
+    {
+      "src": "assets/loading.png",
+      "sizes": "192x192",
+      "type": "image\/png"
+    },
+    {
+      "src": "assets/loading.png",
+      "sizes": "256x256",
+      "type": "image\/png"
+    }
+  ],
+  "theme_color": "#b92b27",
+  "background_color": "#d8ffde",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "./?utm_source=web_app_manifest"
+}

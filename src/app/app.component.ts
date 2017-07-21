@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Ryanair Progressive Web App';
+  private timeMinutesChosen = 2;
+  private timeFieldDisabled = false;
+
+  toggleTimeField(enabled) {
+    this.timeFieldDisabled = enabled;
+  }
 }
