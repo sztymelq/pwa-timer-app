@@ -4,8 +4,5 @@ body {
   display: flex;
   justify-content:center;
   background: #d8ffde;
-}
-
-
-.loading {
+  font-family: 'Artifika', serif;
 }

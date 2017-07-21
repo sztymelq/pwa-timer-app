@@ -4,4 +4,5 @@
   <button (click)="reset()">Reset</button>
 
   Time remaining: <strong>{{timeRemaining}}</strong> seconds
+  <audio #audioNotification preload [src]="soundPath" class="hidden"></audio>
 </div>

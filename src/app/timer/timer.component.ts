@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild} from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -6,19 +6,18 @@ import * as moment from 'moment';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css']
 })
-export class TimerComponent implements OnInit, OnChanges {
+export class TimerComponent implements OnChanges {
   @Input() timeMinutes: number;
+  @Input() soundPath: string;
   @Output() onTimerStateChange = new EventEmitter<boolean>();
+  @ViewChild('audioNotification') audioElement: ElementRef;
+
   private timerPromise;
   private timeRemaining: number;
   private timerStarted: false;
   private TIMER_INTERVAL = 1000;
 
   constructor() {}
-
-  ngOnInit() {
-    this.updateRemainingTime(this.timeMinutes);
-  }
 
   ngOnChanges(changes) {
     this.updateRemainingTime(changes.timeMinutes);
@@ -28,11 +27,16 @@ export class TimerComponent implements OnInit, OnChanges {
     this.timeRemaining = moment.duration(this.timeMinutes, 'minutes').asSeconds();
   }
 
+  onTimerTick() {
+    this.timeRemaining = this.timeRemaining - 1;
+    if (!this.timeRemaining) {
+      this.playSoundAndReset();
+    }
+  }
+
   setTimer(enable) {
     if (enable) {
-      this.timerPromise = setInterval(() => {
-        this.timeRemaining = this.timeRemaining - 1;
-      }, this.TIMER_INTERVAL);
+      this.timerPromise = setInterval(this.onTimerTick.bind(this), this.TIMER_INTERVAL);
     } else {
       const timerTaskId = this.timerPromise ? this.timerPromise.data.handleId : undefined;
       clearTimeout(timerTaskId);
@@ -44,5 +48,10 @@ export class TimerComponent implements OnInit, OnChanges {
   reset() {
     this.setTimer(false);
     this.updateRemainingTime(this.timeMinutes);
+  }
+
+  private playSoundAndReset() {
+    this.audioElement.nativeElement.play();
+    this.reset();
   }
 }
